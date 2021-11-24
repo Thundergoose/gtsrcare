@@ -1,4 +1,5 @@
 const db = require('../models/dbModel.js');
+const bcrypt = require('bcrypt');
 
 const userController = {};
 
@@ -33,8 +34,10 @@ userController.loginUser = (req, res, next) => {
         // });
       }
 
+      const compare = bcrypt.compareSync(password, foundUser.rows[0].password);
+      
       // If user does exist in username, verify password
-      if (foundUser.rows[0].password === password) {
+      if (compare) {
         res.locals.user_id = foundUser.rows[0].id;
         return next();
       }
@@ -69,6 +72,8 @@ userController.registerUser = (req, res, next) => {
   // Extract username, password, and optional name from req.body
   const { username, password, name } = req.body;
 
+  const hashPassword = bcrypt.hashSync(password, 10);
+
   // If username or password not found, invoke global error handler
   if (!username || !password) {
     return next({
@@ -89,7 +94,7 @@ userController.registerUser = (req, res, next) => {
   RETURNING id`;
 
   // Values array
-  const values = [username, name, password];
+  const values = [username, name, hashPassword];
 
   // Database query
   db.query(queryString, values)
