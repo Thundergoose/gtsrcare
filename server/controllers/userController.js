@@ -22,13 +22,15 @@ userController.loginUser = (req, res, next) => {
     .then((foundUser) => {
       // If user with that username does not exist
       if (!foundUser.rows.length) {
-        return next({
-          log: 'userController.loginUser: Username not found in database.',
-          status: 400,
-          message: {
-            err: 'userController.loginUser: Username not found in database.',
-          },
-        });
+        res.locals.errorMessage = "The username and/or password you entered are invalid. Please try again. Or don't. IdGAF. ";
+        return res.status(200).json({ message: res.locals.errorMessage })
+        // return next({
+        //   log: 'userController.loginUser: Username not found in database.',
+        //   status: 400,
+        //   message: {
+        //     err: 'userController.loginUser: Username not found in database.',
+        //   },
+        // });
       }
 
       // If user does exist in username, verify password
@@ -39,13 +41,15 @@ userController.loginUser = (req, res, next) => {
 
       // If user exists, but password does NOT matchs
       else {
-        return next({
-          log: 'userController.loginUser: Password does not match.',
-          status: 400,
-          message: {
-            err: 'userController.loginUser: Password does not match.',
-          },
-        });
+        res.locals.errorMessage = "The username and/or password (but really your password lmao k bye) you entered does not match our records. Please try again (*wink wink*).";
+        return res.status(200).json({ message: res.locals.errorMessage })
+        // next({
+        //   log: 'userController.loginUser: Password does not match.',
+        //   status: 400,
+        //   message: {
+        //     err: 'userController.loginUser: Password does not match.',
+        //   },
+        // });
       }
     })
 

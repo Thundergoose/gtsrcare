@@ -115,6 +115,10 @@ input {
   cursor: pointer;
   font-family: inherit;
 }
+
+#loginError {
+  align-items: center
+}
 /* *********************** MARGIN AND PADDING ***************************** */
 
 /* *********************** NAVBAR STYLE ***************************** */
