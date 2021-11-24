@@ -12,6 +12,13 @@ export const loginActionCreator = (username, password) => {
       password,
     };
     axios.post('/users/login', options).then((response) => {
+      if (response.data.message){
+        const payload = response.data.message;
+        dispatch({
+          type: types.LOGIN_ERROR,
+          payload: payload
+        });
+      } else {
       const randomIndex = Math.floor(
         Math.random() * response.data.complimentsList.length
       );
@@ -22,6 +29,7 @@ export const loginActionCreator = (username, password) => {
         type: types.LOGIN,
         payload: payload,
       });
+    }
     });
   };
 };
