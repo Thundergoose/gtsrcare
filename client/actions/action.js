@@ -26,6 +26,15 @@ export const loginActionCreator = (username, password) => {
   };
 };
 
+export const logoutActionCreator = () => {
+  return function (dispatch) {
+    dispatch({
+      type: types.LOGOUT,
+      payload: null
+    })
+  };
+}
+
 export const signUpActionCreator = (name, username, password) => {
   return function (dispatch) {
     const options = { username, password, name };
