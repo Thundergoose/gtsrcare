@@ -4,7 +4,8 @@ const initialState = {
   complimentsList: [],
   user_id: null,
   tagsList: [],
-  compliment: {}
+  compliment: {},
+  error: null
 };
 
 const complimentReducer = (state = initialState, action) => {
@@ -15,12 +16,15 @@ const complimentReducer = (state = initialState, action) => {
     case types.LOGOUT:
       //set user_id to null
       return { ...state, user_id: action.payload };
+    case types.LOGIN_ERROR:
+      //set error to error message
+      //console.log('action payload:', action.payload)
+      return { ...state, error: action.payload };
     case types.SIGN_UP:
       //set user_id
       return { ...state, user_id: action.payload.user_id, complimentsList: action.payload.complimentsList, tagsList: action.payload.tagsList, compliment: action.payload.compliment };
     case types.GET_COMPLIMENT:
       //assign compliment list to the list fetched from get request
-      console.log("action.payload", action.payload)
       return { ...state, complimentsList: action.payload.complimentsList, compliment: action.payload.compliment };
 
     case types.POST_COMPLIMENT:

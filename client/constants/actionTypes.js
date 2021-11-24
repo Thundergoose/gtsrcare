@@ -9,3 +9,5 @@ export const PATCH_COMPLIMENT = 'PATCH_COMPLIMENT';
 
 //create new logout const
 export const LOGOUT = 'LOGOUT';
+//create new login error action
+export const LOGIN_ERROR = 'LOGIN_ERROR';
