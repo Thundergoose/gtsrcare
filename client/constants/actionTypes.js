@@ -6,4 +6,6 @@ export const GET_COMPLIMENT = 'GET_COMPLIMENT';
 export const POST_COMPLIMENT = 'POST_COMPLIMENT';
 export const DELETE_COMPLIMENT = 'DELETE_COMPLIMENT';
 export const PATCH_COMPLIMENT = 'PATCH_COMPLIMENT';
- 
+
+//create new logout const
+export const LOGOUT = 'LOGOUT';

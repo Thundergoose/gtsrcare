@@ -45,11 +45,14 @@ class ComplimentsList extends Component {
   render() {
     // Generate dropdown categories for filter 
     const options = [];
+
+    options.push(<option value='all' key='all'>View All</option>)
+
     for (const currTag of this.props.tagsList) {
       options.push(<option value={currTag} key={currTag}>{currTag}</option>)
     }
 
-    options.push(<option value='all' key='all'>View All</option>)
+    // options.push(<option value='all' key='all'>View All</option>)
 
     // Generate all compliments 
     const allCompliments = [];

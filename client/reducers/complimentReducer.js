@@ -12,6 +12,9 @@ const complimentReducer = (state = initialState, action) => {
     case types.LOGIN:
       //set user_id
       return { ...state, user_id: action.payload.user_id, complimentsList: action.payload.complimentsList, tagsList: action.payload.tagsList, compliment: action.payload.compliment };
+    case types.LOGOUT:
+      //set user_id to null
+      return { ...state, user_id: action.payload };
     case types.SIGN_UP:
       //set user_id
       return { ...state, user_id: action.payload.user_id, complimentsList: action.payload.complimentsList, tagsList: action.payload.tagsList, compliment: action.payload.compliment };
@@ -54,6 +57,7 @@ const complimentReducer = (state = initialState, action) => {
       );
       return { ...state, complimentsList: newComplimentsList };
     }
+
     
     default:
       return state;
