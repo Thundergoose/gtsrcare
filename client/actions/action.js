@@ -47,6 +47,13 @@ export const signUpActionCreator = (name, username, password) => {
   return function (dispatch) {
     const options = { username, password, name };
     axios.post('/users/signup', options).then((response) => {
+      if (response.data.message){
+        const payload = response.data.message;
+        dispatch({
+          type: types.SIGNUP_ERROR,
+          payload: payload
+        });
+      } else {  
       const randomIndex = Math.floor(
         Math.random() * response.data.complimentsList.length
       );
@@ -54,6 +61,7 @@ export const signUpActionCreator = (name, username, password) => {
       const payload = response.data;
       payload.compliment = randomCompliment;
       dispatch({ type: types.SIGN_UP, payload: payload });
+    }
     });
   };
 };

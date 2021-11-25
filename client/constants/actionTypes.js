@@ -14,3 +14,5 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const POST_FAVORITE = 'POST_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
+
+export const SIGNUP_ERROR = 'SIGNUP_ERROR';
