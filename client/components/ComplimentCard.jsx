@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import favstar from '../assets/fav-star.png';
 
 class ComplimentCard extends React.Component{
     constructor(props) {
@@ -37,7 +38,11 @@ class ComplimentCard extends React.Component{
     }
     return (
         <div className='card-container'>
-          <div className='secondary-text margin-top-sm'>Date: {date.slice(0,10)}</div>
+          <div className='secondary-text margin-top-sm'>
+            Date: {date.slice(0,10)}
+            <button className='favorites-button' onClick><img id = 'star' src = {favstar}/></button>
+          </div>
+       
           <div className='primary-text margin-top-sm'>Message: {message}</div>
           <div className='primary-text margin-top-sm'>From: {sender}</div>
 

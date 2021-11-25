@@ -12,6 +12,5 @@ export const LOGOUT = 'LOGOUT';
 //create new login error action
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
-//Favorites actions
 export const POST_FAVORITE = 'POST_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
