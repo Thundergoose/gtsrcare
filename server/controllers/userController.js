@@ -88,6 +88,17 @@ userController.registerUser = (req, res, next) => {
   // If name is not defined, reassign value to null before inserting into db
   if (!name) name = null;
 
+
+  const searchString = `SELECT * FROM users WHERE username='${username}'`;
+
+  db.query(searchString)
+  .then((foundUser) => {
+    if(foundUser.rows[0]){
+      res.locals.errorMessage = "Sorry, that username already exists. Choose another one!";
+      return res.status(200).json({ message: res.locals.errorMessage })
+    }
+    });
+
   // Insert new user into db
   const queryString = `INSERT INTO users (username, name, password)
   VALUES ($1, $2, $3)
