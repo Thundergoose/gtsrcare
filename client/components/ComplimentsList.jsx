@@ -47,12 +47,11 @@ class ComplimentsList extends Component {
     const options = [];
 
     options.push(<option value='all' key='all'>View All</option>)
+    options.push(<option value='favorites' key='favorites'>Favorites</option>)
 
     for (const currTag of this.props.tagsList) {
       options.push(<option value={currTag} key={currTag}>{currTag}</option>)
     }
-
-    // options.push(<option value='all' key='all'>View All</option>)
 
     // Generate all compliments 
     const allCompliments = [];
