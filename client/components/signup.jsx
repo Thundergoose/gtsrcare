@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 
 // mapStateToProps 
 const mapStateToProps = state => ({
-  user_id: state.compliments.user_id
+  user_id: state.compliments.user_id,
+  error: state.compliments.error
 })
 
 // mapDispatchToProps
@@ -35,9 +36,13 @@ class Signup extends Component {
   }
 
   render() {
-    return this.props.user_id ? (
-      <Navigate to='/dashboard' />
-    ) : (
+  
+  if (this.props.user_id) {
+    return (<Navigate to='/dashboard' />)
+  }
+
+  else if (!this.props.user_id && !this.props.error) {
+    return (
       <div className='login'>
         <h2>Sign Up</h2>
         <form className='container'>
@@ -63,7 +68,69 @@ class Signup extends Component {
 
         <Link to='/' className='signup-link'>Log In</Link>
       </div>
-    );
+    )
+  }
+
+  else if (!this.props.user_id && this.props.error) {
+    return (
+      <div className='login'>
+      <h2>Sign Up</h2>
+      <form className='container'>
+        <label className='container' id='field-container'>
+          <div id='loginName'>Name</div>
+          <input type='text' id='name' />
+        </label>
+
+        <label className='container' id='field-container'>
+          <div id='loginUsername'>Username</div>
+          <input type='text' id='username' />
+        </label>
+
+        <label className='container' id='field-container'>
+          <div id='loginPassword'> Password</div>
+          <input type='password' id='password' />
+        </label>
+        <div style={{color: "red", fontSize: "16px"}} id='loginError'><strong><em>Error</em></strong>: {this.props.error} </div>
+      </form>
+
+      <button id='loginButton' onClick={this.handleClick}>
+        <div> Sign Up </div>
+      </button>
+
+      <Link to='/' className='signup-link'>Log In</Link>
+    </div>
+    )
+  }
+
+    // return this.props.user_id ? (
+    //   <Navigate to='/dashboard' />
+    // ) : (
+    //   <div className='login'>
+    //     <h2>Sign Up</h2>
+    //     <form className='container'>
+    //       <label className='container' id='field-container'>
+    //         <div id='loginName'>Name</div>
+    //         <input type='text' id='name' />
+    //       </label>
+
+    //       <label className='container' id='field-container'>
+    //         <div id='loginUsername'>Username</div>
+    //         <input type='text' id='username' />
+    //       </label>
+
+    //       <label className='container' id='field-container'>
+    //         <div id='loginPassword'> Password</div>
+    //         <input type='password' id='password' />
+    //       </label>
+    //     </form>
+
+    //     <button id='loginButton' onClick={this.handleClick}>
+    //       <div> Sign Up </div>
+    //     </button>
+
+    //     <Link to='/' className='signup-link'>Log In</Link>
+    //   </div>
+    // );
   }
 }
 

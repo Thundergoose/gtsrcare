@@ -68,7 +68,7 @@ userController.loginUser = (req, res, next) => {
 };
 
 // POST request to /users/signup
-userController.registerUser = (req, res, next) => {
+userController.registerUser = async (req, res, next) => {
   // Extract username, password, and optional name from req.body
   const { username, password, name } = req.body;
 
@@ -91,13 +91,12 @@ userController.registerUser = (req, res, next) => {
 
   const searchString = `SELECT * FROM users WHERE username='${username}'`;
 
-  db.query(searchString)
-  .then((foundUser) => {
-    if(foundUser.rows[0]){
+  const result = await db.query(searchString);
+
+  if(result.rows[0]){
       res.locals.errorMessage = "Sorry, that username already exists. Choose another one!";
       return res.status(200).json({ message: res.locals.errorMessage })
-    }
-    });
+    };
 
   // Insert new user into db
   const queryString = `INSERT INTO users (username, name, password)
