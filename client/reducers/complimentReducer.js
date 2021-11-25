@@ -15,7 +15,7 @@ const complimentReducer = (state = initialState, action) => {
       return { ...state, user_id: action.payload.user_id, complimentsList: action.payload.complimentsList, tagsList: action.payload.tagsList, compliment: action.payload.compliment };
     case types.LOGOUT:
       //set user_id to null
-      return { ...state, user_id: action.payload };
+      return { ...state, user_id: action.payload, error: action.payload };
     case types.LOGIN_ERROR:
       //set error to error message
       //console.log('action payload:', action.payload)
