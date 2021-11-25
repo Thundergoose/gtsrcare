@@ -11,6 +11,23 @@ router.get('/', complimentController.getCompliments, (req, res) => {
     .json({ complimentsList: res.locals.complimentsList });
 });
 
+
+//Route to view all favorites:
+//router.get('/favorites', complimentController.getFavorites, (req, res))
+
+//Route to add to favorites:
+router.post('/favorites', complimentController.addFavorites, (req, res) => {
+  return res.status(200).send({ message: 'favorite added' });
+});
+
+
+//Route to delete from favorites:
+router.delete('/favorites', complimentController.deleteFavorites, (req, res) => {
+  return res.status(200).send({ message: 'favorite deleted' });
+});
+
+
+
 //POST request to /compliments?user=1
 //responds with compliment that was created
 router.post('/', complimentController.postCompliment, (req, res) => {

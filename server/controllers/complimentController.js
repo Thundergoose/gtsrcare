@@ -152,4 +152,53 @@ complimentController.deleteCompliment = async (req, res, next) => {
 
   return next();
 };
+
+
+//Middleware to add favorites
+
+complimentController.addFavorites = async (req, res, next) => {
+
+  const { complimentId } = req.body;
+
+  const queryString = `
+  INSERT INTO favorites (compliment_id)
+  VALUES ($1)
+  RETURNING *`;
+  const values = [complimentId];
+  try {
+    const favorite = await db.query(queryString, values);
+    res.locals.favorite = favorite.rows[0];
+    return next();
+  } catch (err) {
+    return next({
+      status: 500,
+      message: `complimentsController.addFavorites error: ${err}`,
+    });
+  }
+};
+
+
+//Middleware to delete favorites
+
+complimentController.deleteFavorites = async (req, res, next) => {
+
+  const { complimentId } = req.body;
+  const queryString = `
+  DELETE FROM favorites 
+  WHERE compliment_id =${complimentId} 
+  ;`;
+
+  try {
+    const deletedFavorite = await db.query(queryString);
+  } catch (err) {
+    return next({
+      status: 500,
+      message: `complimentsController.deleteCompliment error: ${err}`,
+    });
+  }
+
+  return next();
+};
+
+
 module.exports = complimentController;
