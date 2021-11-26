@@ -154,16 +154,32 @@ complimentController.deleteCompliment = async (req, res, next) => {
 };
 
 
-//Middleware to add favorites
+//Middleware to update favorites
 
-complimentController.addFavorites = async (req, res, next) => {
+complimentController.updateFavorite = async (req, res, next) => {
 
   const { complimentId } = req.body;
 
-  const queryString = `
-  INSERT INTO favorites (compliment_id)
-  VALUES ($1)
-  RETURNING *`;
+  const searchString = `SELECT * FROM favorites WHERE compliment_id='${complimentId}'`;
+
+  const result = await db.query(searchString);
+
+  if(result.rows[0]){
+    const queryString = `DELETE FROM favorites WHERE compliment_id ='${complimentId}'`;
+  
+    try {
+      const deletedFavorite = await db.query(queryString);
+      return next();
+    } catch (err) {
+      return next({
+        status: 500,
+        message: `complimentsController.deleteCompliment error: ${err}`,
+      });
+    }
+  }
+  
+  else {
+  const queryString = `INSERT INTO favorites (compliment_id) VALUES ($1) RETURNING *`;
   const values = [complimentId];
   try {
     const favorite = await db.query(queryString, values);
@@ -176,29 +192,6 @@ complimentController.addFavorites = async (req, res, next) => {
     });
   }
 };
-
-
-//Middleware to delete favorites
-
-complimentController.deleteFavorites = async (req, res, next) => {
-
-  const { complimentId } = req.body;
-  const queryString = `
-  DELETE FROM favorites 
-  WHERE compliment_id =${complimentId} 
-  ;`;
-
-  try {
-    const deletedFavorite = await db.query(queryString);
-  } catch (err) {
-    return next({
-      status: 500,
-      message: `complimentsController.deleteCompliment error: ${err}`,
-    });
-  }
-
-  return next();
-};
-
+}
 
 module.exports = complimentController;
