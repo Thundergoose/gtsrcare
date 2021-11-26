@@ -144,3 +144,16 @@ export const patchComplimentActionCreator = (
     });
   };
 };
+
+export const updateFavoriteActionCreator = (complimentId) => {
+  return function (dispatch) {
+    const body = { complimentId };
+    axios.post('/compliments/favorites', body).then((response) => {
+        const payload = response.data.message;
+        dispatch({
+          type: types.UPDATE_FAVORITE,
+          payload: payload
+        });
+    });
+  }
+}

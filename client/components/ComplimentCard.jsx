@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import favstar from '../assets/fav-star.png';
+import filledstar from '../assets/fav-star.png';
+import emptystar from '../assets/empty_star.png';
+
 
 class ComplimentCard extends React.Component{
     constructor(props) {
@@ -9,6 +11,7 @@ class ComplimentCard extends React.Component{
         }
         this.handleEdit = this.handleEdit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleClick = this.handleClick.bind(this)
     }
 
   // Handle edit 
@@ -24,9 +27,13 @@ class ComplimentCard extends React.Component{
     this.setState({ editMode: false });
   }
 
+  // handleClick() {
+
+  // }
+
 
   render() {
-    const { user_id, id, message, sender, tag, date, deleteCompliment, tagsList } = this.props;
+    const { user_id, id, message, sender, tag, date, deleteCompliment, tagsList, updateFavorite } = this.props;
     const options = [];
   
     for (const currTag of tagsList) {
@@ -40,7 +47,7 @@ class ComplimentCard extends React.Component{
         <div className='card-container'>
           <div className='secondary-text margin-top-sm'>
             Date: {date.slice(0,10)}
-            <button className='favorites-button' onClick><img id = 'star' src = {favstar}/></button>
+            <button className='favorites-button' onClick = {() => updateFavorite(this.props.id)}><img id = 'star' src = {filledstar}/></button>
           </div>
        
           <div className='primary-text margin-top-sm'>Message: {message}</div>

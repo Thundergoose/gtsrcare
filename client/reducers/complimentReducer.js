@@ -65,6 +65,10 @@ const complimentReducer = (state = initialState, action) => {
       return { ...state, complimentsList: newComplimentsList };
     }
 
+    case types.UPDATE_FAVORITE:
+      //toggle add/remove from favorites
+      console.log('In reducer:', action.payload)
+      return { ...state };
     
     default:
       return state;
