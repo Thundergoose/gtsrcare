@@ -127,3 +127,20 @@
   margin-bottom: 30px;
   text-align: center;
 }
+
+.randomComplimentSender {
+  margin: 10px;
+  font-style: italic;
+  align-self: center;
+}
+
+.randomComplimentSender {
+  color: whitesmoke;
+  /* font-family: 'Homemade Apple', cursive; */
+  /* font-family: 'Cabin', sans-serif; */
+  font-family: 'Estonia', cursive;
+  /* font-size: xx-large; */
+  font-size: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+}
