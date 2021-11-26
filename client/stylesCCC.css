@@ -185,8 +185,8 @@ input[type='select'] {
 .favorites-button {
   float:right;
   background: transparent;
-  height: 1px;
-  width: 1px;
+  height: 20px;
+  width: 20px;
   border: none;
   /* box-shadow: 3px; */
 }

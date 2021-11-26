@@ -37,7 +37,7 @@ class Dashmain extends Component {
         <div className='spacer'/>
         <div className='dash-container' > 
           <div className= "randomCompliment">{this.props.randomCompliment ? this.props.randomCompliment.message : 'No Compliment'}</div>
-          
+          <div className= "randomComplimentSender"> - {this.props.randomCompliment.sender} </div>
           <div id="pick">
             <div className="pickCategoryLabel">
             <label className="text2">Pick a Category: </label>

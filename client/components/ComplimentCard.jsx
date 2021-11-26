@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import filledstar from '../assets/fav-star.png';
 import emptystar from '../assets/empty_star.png';
 
+const images = {
+  filledstarpic : filledstar,
+  emptystarpic : emptystar
+}
 
 class ComplimentCard extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          editMode: false
+          editMode: false,
+          favStatus: false
         }
         this.handleEdit = this.handleEdit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleClick = this.handleClick.bind(this)
+        this.toggleClick = this.toggleClick.bind(this)
     }
 
   // Handle edit 
@@ -27,15 +32,18 @@ class ComplimentCard extends React.Component{
     this.setState({ editMode: false });
   }
 
-  // handleClick() {
-
-  // }
+  toggleClick() {
+    this.setState(state => ({ favStatus: !state.favStatus }))
+    this.props.updateFavorite(this.props.id);
+  }
+  
+  getImageName = () => this.state.favStatus ? 'filledstarpic' : 'emptystarpic'
 
 
   render() {
-    const { user_id, id, message, sender, tag, date, deleteCompliment, tagsList, updateFavorite } = this.props;
+    const { user_id, id, message, sender, tag, date, deleteCompliment, tagsList } = this.props;
     const options = [];
-  
+    const imageName = this.getImageName();
     for (const currTag of tagsList) {
       if (currTag === tag) {
         options.push(<option value={currTag} key={currTag}>{currTag}</option>)
@@ -47,7 +55,7 @@ class ComplimentCard extends React.Component{
         <div className='card-container'>
           <div className='secondary-text margin-top-sm'>
             Date: {date.slice(0,10)}
-            <button className='favorites-button' onClick = {() => updateFavorite(this.props.id)}><img id = 'star' src = {filledstar}/></button>
+            <button className='favorites-button' onClick = {this.toggleClick}><img id = 'star' src = {images[imageName]}/></button>
           </div>
        
           <div className='primary-text margin-top-sm'>Message: {message}</div>
